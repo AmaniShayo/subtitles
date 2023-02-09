@@ -19,7 +19,7 @@ mongoose.set("strictQuery", false);
 app.use(async (req, res, next) => {
 
     try {
-        await mongoose.connect('mongodb://localhost:27017/subtitles');
+        await mongoose.connect('mongodb://127.0.0.1:27017/subtitles');
         next();
     } catch (error) {
         res.status(500).json({ message: "internal server error" }).end();

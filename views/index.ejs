@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>subtitles</title>
+    <style>
+      p {
+        color: orange;
+        margin: 4px;
+      }
+      a {
+        margin: 0px;
+        font-size: x-large;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">Movies and series subtitles</h1>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <p style="display: none; color: orange" id="resultP">No result found</p>
+      <input
+        type="text"
+        id="search_in"
+        placeholder="search"
+        style="
+          width: 80%;
+          height: 40px;
+          text-align: center;
+          border-radius: 10px;
+        "
+      />
+    </div>
+    <h3 style="text-align: center">Trending subtitles:</h3>
+    <div style="height: auto; padding: 10px" id="main">
+      <% subs.forEach(link=> { %>
+      <a href="/download/<%-link.link-%>"><p><%-link.disc-%></p></a>
+      <%}); %>
+    </div>
+    <div id="search"></div>
+    <script>
+      let timer;
+      document.querySelector("#search_in").addEventListener("keyup", () => {
+        clearTimeout(timer);
+        timer = setTimeout(search, 1000);
+      });
+      function search() {
+        const input = document.querySelector("#search_in").value;
+        fetch(`/search?q=${input}`)
+          .then((response) => response.text())
+          .then((data) => {
+            let result = JSON.parse(data);
+            document.querySelector("#search").innerHTML = "";
+            createSubs(result);
+          });
+      }
+
+      function createSubs(arr) {
+        if (!arr[0]) {
+          document.querySelector("#resultP").style.display = "block";
+          document.querySelector("#search").style.display = "none";
+          document.querySelector("#main").style.display = "block";
+          return;
+        }
+        document.querySelector("#resultP").style.display = "none";
+        document.querySelector("#search").style.display = "block";
+        document.querySelector("#main").style.display = "none";
+        arr.forEach((result) => {
+          let para = document.createElement("p");
+          para.innerHTML = result.disc;
+          let link = document.createElement("a");
+          link.href = `/download/${result.link}`;
+          link.appendChild(para);
+          document.querySelector("#search").appendChild(link);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>subtitles</title>
+    <style>
+      form {
+        align-items: center;
+      }
+      input[type="text"] {
+        width: 80%;
+        height: 20px;
+        border-radius: 10px;
+        margin-top: 10px;
+        padding: 10px;
+        text-align: center;
+      }
+      input {
+        height: 30px;
+        margin-top: 10px;
+        padding: 10px;
+      }
+      button {
+        width: 80%;
+        font-size: large;
+        cursor: pointer;
+        height: 50px;
+        background-color: orange;
+        border-radius: 10px;
+        border: 2px solid rgb(156, 154, 154);
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <table style="width: 100%; height: 80vh">
+        <td>
+          <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="subFile"> Select The File:</label><br />
+            <input type="file" name="subFile" required /><br />
+            <label for="fileName"> Enter Subtitle Name:</label><br />
+            <input
+              type="text"
+              name="fileName"
+              required
+              placeholder="Enter file name"
+            />
+            <br />
+            <button>Upload</button>
+          </form>
+        </td>
+      </table>
+    </div>
+  </body>
+</html>

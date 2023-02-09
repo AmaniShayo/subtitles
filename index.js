@@ -15,7 +15,7 @@ app.set('views', path.resolve(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
-
+mongoose.set("strictQuery", false);
 app.use(async (req, res, next) => {
 
     try {

@@ -54,6 +54,7 @@ app.post('/upload', (req, res) => {
     form.uploadDir = path.join(__dirname, "uploads");
     form.parse(req, function (err, fields, files) {
         if (err) {
+            console.log(err);
             res.status(400).send('bad request');
         } else {
             let oldpath = files.subFile.filepath;

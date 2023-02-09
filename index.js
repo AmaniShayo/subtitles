@@ -51,6 +51,7 @@ app.get('/download/:id', async (req, res) => {
 });
 app.post('/upload', (req, res) => {
     let form = new formidable.IncomingForm();
+    form.uploadDir = path.join(__dirname, "uploads");
     form.parse(req, function (err, fields, files) {
         if (err) {
             res.status(400).send('bad request');
